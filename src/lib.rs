@@ -154,7 +154,8 @@ fn spectator_update(
             let mut dof: Vec3 = camera_transform.rotation.to_euler(EulerRot::YXZ).into();
             
             dof.x += mouse_x;
-            dof.y = (dof.y + mouse_y).clamp(-90f32.to_radians(), 90f32.to_radians());
+            // At 90 degrees, yaw gets misinterpeted as roll. Making 89 the limit fixes that.
+            dof.y = (dof.y + mouse_y).clamp(-89f32.to_radians(), 89f32.to_radians());
             dof.z = 0f32;
     
             camera_transform.rotation = Quat::from_euler(EulerRot::YXZ, dof.x, dof.y, dof.z);
