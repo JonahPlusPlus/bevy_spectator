@@ -1,0 +1,22 @@
+[package]
+name = "bevy_spectator"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bevy = { version = "0.9", default-features = false }
+
+[dev-dependencies]
+bevy = "0.9"
+
+[features]
+default = ["init"]
+init = [] # enables automatically choosing a camera
+
+[[example]]
+name = "basic"
+path = "examples/basic.rs"
+
+[[example]]
+name = "3d_scene"
+path = "examples/3d_scene.rs"
