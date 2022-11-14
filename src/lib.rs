@@ -13,6 +13,7 @@
 //! |Up|`Space`|
 //! |Down|`LControl`|
 //! |Alt. Speed|`LShift`|
+//! |Release Cursor|`Escape`|
 //! 
 //! Movement is constrained to the appropriate axes. (`WASD` to X & Z axes, `Space` & `LShift` to Y axis)
 //! 
