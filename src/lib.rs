@@ -15,7 +15,7 @@
 //! |Alt. Speed|`LShift`|
 //! |Release Cursor|`Escape`|
 //! 
-//! Movement is constrained to the appropriate axes. (`WASD` to X & Z axes, `Space` & `LShift` to Y axis)
+//! Movement is constrained to the appropriate axes. (`WASD` to X & Z axes, `Space` & `LShift` to the Y axis)
 //! 
 //! ## `basic` Example
 //! ```
