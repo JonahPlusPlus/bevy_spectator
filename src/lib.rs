@@ -179,6 +179,8 @@ fn spectator_update(
 
             let mut forward = camera_transform.forward();
             forward.y = 0f32;
+            forward = forward.normalize_or_zero(); // fly fast even when look down/up
+
             let mut right = camera_transform.right();
             right.y = 0f32; // more of a sanity check
             let up = Vec3::Y;
