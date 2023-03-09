@@ -1,4 +1,3 @@
-
 use bevy::prelude::*;
 use bevy_spectator::*;
 
@@ -11,7 +10,5 @@ fn main() {
 }
 
 fn setup(mut commands: Commands) {
-    commands.spawn((
-        Camera3dBundle::default(), Spectator
-    ));
+    commands.spawn((Camera3dBundle::default(), Spectator));
 }
