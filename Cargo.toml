@@ -11,10 +11,10 @@ repository = "https://github.com/JonahPlusPlus/bevy_spectator"
 exclude = ["/examples/"]
 
 [dependencies]
-bevy = { version = "0.9", default-features = false }
+bevy = { version = "0.10", default-features = false }
 
 [dev-dependencies]
-bevy = "0.9"
+bevy = "0.10"
 
 [features]
 default = ["init"]
