@@ -1,5 +1,5 @@
 # bevy_spectator
-[![bevy](https://img.shields.io/badge/Bevy-0.9-blue)](https://crates.io/crates/bevy/0.9.0)
+[![bevy](https://img.shields.io/badge/Bevy-0.10-blue)](https://crates.io/crates/bevy/0.10.0)
 [![Crates.io](https://img.shields.io/crates/v/bevy_spectator)](https://crates.io/crates/bevy_spectator)
 [![Crates.io](https://img.shields.io/crates/d/bevy_spectator)](https://crates.io/crates/bevy_spectator)
 [![docs.rs](https://img.shields.io/docsrs/bevy_spectator)](https://docs.rs/bevy_spectator/)
