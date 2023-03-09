@@ -79,17 +79,19 @@ fn spectator_init(
 ) {
     use bevy::ecs::query::QuerySingleError;
 
-    settings.active_spectator = match cameras.get_single() {
-        Ok(a) => Some(a),
-        Err(QuerySingleError::NoEntities(_)) => {
-            warn!("Failed to find a Spectator; Active camera will remain unset.");
-            None
-        }
-        Err(QuerySingleError::MultipleEntities(_)) => {
-            warn!("Found more than one Spectator; Active camera will remain unset.");
-            None
-        }
-    };
+    if settings.active_spectator.is_none() {
+        settings.active_spectator = match cameras.get_single() {
+            Ok(a) => Some(a),
+            Err(QuerySingleError::NoEntities(_)) => {
+                warn!("Failed to find a Spectator; Active camera will remain unset.");
+                None
+            }
+            Err(QuerySingleError::MultipleEntities(_)) => {
+                warn!("Found more than one Spectator; Active camera will remain unset.");
+                None
+            }
+        };
+    }
 }
 
 fn spectator_update(
@@ -102,6 +104,18 @@ fn spectator_update(
     mut camera_transforms: Query<&mut Transform, With<Spectator>>,
     mut focus: Local<bool>,
 ) {
+    let Some(camera_id) = settings.active_spectator else {
+        motion.clear();
+        return;
+    };
+
+    let Ok(mut camera_transform) = camera_transforms.get_mut(camera_id) else {
+        error!("Failed to find camera for active camera entity ({camera_id:?})");
+        settings.active_spectator = None;
+        motion.clear();
+        return;
+    };
+
     let mut window = match settings.active_window {
         Some(active) => {
             let Ok((window, _)) = windows.get_mut(active) else {
@@ -120,18 +134,6 @@ fn spectator_update(
 
             window
         }
-    };
-
-    let Some(camera_id) = settings.active_spectator else {
-        motion.clear();
-        return;
-    };
-
-    let Ok(mut camera_transform) = camera_transforms.get_mut(camera_id) else {
-        error!("Failed to find camera for active camera entity ({camera_id:?})");
-        settings.active_spectator = None;
-        motion.clear();
-        return;
     };
 
     let mut set_focus = |focused: bool| {
@@ -222,7 +224,9 @@ pub struct SpectatorSettings {
     ///
     /// Use this to control which [`Spectator`] you are using.
     ///
-    /// If `None`, spectator mode will be disabled.
+    /// If the `init` feature is enabled, `None` will update to a single, marked camera.
+    ///
+    /// Setting to `None` will disable the spectator mode.
     pub active_spectator: Option<Entity>,
     /// The `Entity` of the active `Window`. (Default: `None`)
     ///
