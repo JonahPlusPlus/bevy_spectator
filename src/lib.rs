@@ -163,8 +163,8 @@ fn spectator_update(
                 total
             };
 
-            let mouse_x = -mouse_delta.x * time.delta_seconds() * settings.sensitivity;
-            let mouse_y = -mouse_delta.y * time.delta_seconds() * settings.sensitivity;
+            let mouse_x = -mouse_delta.x * settings.sensitivity;
+            let mouse_y = -mouse_delta.y * settings.sensitivity;
 
             let mut dof: Vec3 = camera_transform.rotation.to_euler(EulerRot::YXZ).into();
 
@@ -211,8 +211,9 @@ fn spectator_update(
             right.y = 0f32; // more of a sanity check
             let up = Vec3::Y;
 
-            camera_transform.translation +=
-                forward * delta_axial + right * delta_lateral + up * delta_vertical;
+            let result = forward * delta_axial + right * delta_lateral + up * delta_vertical;
+
+            camera_transform.translation += result * time.delta_seconds();
         }
     }
 
