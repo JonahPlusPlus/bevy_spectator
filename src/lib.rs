@@ -237,15 +237,15 @@ pub struct SpectatorSettings {
     ///
     /// If `None`, the primary window will be used.
     pub active_window: Option<Entity>,
-    /// The base speed of the active [`Spectator`]. (Default: `0.1`)
+    /// The base speed of the active [`Spectator`]. (Default: `10.0`)
     ///
     /// Use this to control how fast the [`Spectator`] normally moves.
     pub base_speed: f32,
-    /// The alternate speed of the active [`Spectator`]. (Default: `0.5`)
+    /// The alternate speed of the active [`Spectator`]. (Default: `50.0`)
     ///
     /// Use this to control how fast the [`Spectator`] moves when you hold `Shift`.
     pub alt_speed: f32,
-    /// The camera sensitivity of the active [`Spectator`]. (Default: `0.1`)
+    /// The camera sensitivity of the active [`Spectator`]. (Default: `0.001`)
     ///
     /// Use this to control how fast the [`Spectator`] turns when you move the mouse.
     pub sensitivity: f32,
@@ -256,9 +256,9 @@ impl Default for SpectatorSettings {
         Self {
             active_spectator: None,
             active_window: None,
-            base_speed: 0.1,
-            alt_speed: 0.5,
-            sensitivity: 0.1,
+            base_speed: 10.0,
+            alt_speed: 50.0,
+            sensitivity: 0.001,
         }
     }
 }
