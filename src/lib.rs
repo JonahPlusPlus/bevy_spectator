@@ -66,9 +66,9 @@ impl Plugin for SpectatorPlugin {
         app.init_resource::<SpectatorSettings>();
 
         #[cfg(feature = "init")]
-        app.add_startup_system(spectator_init.in_base_set(StartupSet::PostStartup));
+        app.add_systems(PostStartup, spectator_init);
 
-        app.add_system(spectator_update);
+        app.add_systems(Update, spectator_update);
     }
 }
 
@@ -187,13 +187,13 @@ fn spectator_update(
             } else {
                 0f32
             };
-            let down = if keys.pressed(KeyCode::LControl) {
+            let down = if keys.pressed(KeyCode::ControlLeft) {
                 1f32
             } else {
                 0f32
             };
 
-            let speed = if keys.pressed(KeyCode::LShift) {
+            let speed = if keys.pressed(KeyCode::ShiftLeft) {
                 settings.alt_speed
             } else {
                 settings.base_speed

@@ -9,9 +9,8 @@ fn main() {
             sensitivity: 0.05,
             ..default()
         })
-        .add_plugins(DefaultPlugins)
-        .add_plugin(SpectatorPlugin)
-        .add_startup_system(setup)
+        .add_plugins((DefaultPlugins, SpectatorPlugin))
+        .add_systems(Startup, setup)
         .run();
 }
 
