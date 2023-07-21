@@ -1,41 +1,42 @@
-//! # bevy_spectator
-//!
-//! A spectator camera plugin for the [Bevy game engine](https://bevyengine.org/).
-//!
-//! ## Controls
-//!
-//! |Action|Key|
-//! |-|-|
-//! |Forward|`W`|
-//! |Left|`A`|
-//! |Backward|`S`|
-//! |Right|`D`|
-//! |Up|`Space`|
-//! |Down|`LControl`|
-//! |Alternative Speed|`LShift`|
-//! |Release Cursor|`Escape`|
-//!
-//! Movement is constrained to the appropriate axes. (`WASD` to X & Z axes, `Space` & `LShift` to the Y axis)
-//!
-//! ## `basic` Example
-//! ```
-//! use bevy::prelude::*;
-//! use bevy_spectator::*;
-//!
-//! fn main() {
-//!     App::new()
-//!         .add_plugins(DefaultPlugins)
-//!         .add_plugin(SpectatorPlugin)
-//!         .add_startup_system(setup)
-//!         .run();
-//! }
-//!
-//! fn setup(mut commands: Commands) {
-//!     commands.spawn((
-//!         Camera3dBundle::default(), Spectator
-//!     ));
-//! }
-//! ```
+/*!
+# Bevy Spectator
+
+A spectator camera plugin for the [Bevy game engine](https://bevyengine.org/).
+
+## Controls
+
+|Action|Key|
+|-|-|
+|Forward|`W`|
+|Left|`A`|
+|Backward|`S`|
+|Right|`D`|
+|Up|`Space`|
+|Down|`LControl`|
+|Alternative Speed|`LShift`|
+|Release Cursor|`Escape`|
+
+Movement is constrained to the appropriate axes. (`WASD` to X & Z axes, `Space` & `LShift` to the Y axis)
+
+## Basic example
+
+```rust
+use bevy::prelude::*;
+use bevy_spectator::*;
+
+fn main() {
+    App::new()
+        .add_plugins((MinimalPlugins, SpectatorPlugin))
+        .add_startup_system(setup);
+}
+
+fn setup(mut commands: Commands) {
+    commands.spawn((
+        Camera3dBundle::default(), Spectator
+    ));
+}
+```
+*/
 
 use bevy::{
     input::mouse::MouseMotion,
