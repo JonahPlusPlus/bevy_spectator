@@ -41,7 +41,8 @@ fn setup(mut commands: Commands) {
 
 ## Bevy compatibility
 
-| bevy   | bevy_spectator |
-|--------|----------------|
-| 0.11.0 | 0.2            |
-| 0.10.0 | 0.1            |
+| bevy | bevy_spectator |
+|------|----------------|
+| 0.11 | 0.3            |
+| 0.10 | 0.2            |
+| 0.9  | 0.1            |
