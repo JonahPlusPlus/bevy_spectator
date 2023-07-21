@@ -5,7 +5,39 @@
 
 A spectator camera plugin for the [Bevy game engine](https://bevyengine.org/).
 
-See the basic example by clicking on the docs badge.
+## Controls
+
+| Action            | Key           |
+|-------------------|---------------|
+| Forward           | `W`           |
+| Left              | `A`           |
+| Backward          | `S`           |
+| Right             | `D`           |
+| Up                | `Space`       |
+| Down              | `ControlLeft` |
+| Alternative Speed | `ShiftLeft`   |
+| Release Cursor    | `Escape`      |
+
+Movement is constrained to the appropriate axes. (`WASD` to X & Z axes, `Space` & `ShiftLeft` to the Y axis)
+
+## Basic example
+
+```rust
+use bevy::prelude::*;
+use bevy_spectator::*;
+
+fn main() {
+    App::new()
+        .add_plugins((MinimalPlugins, SpectatorPlugin))
+        .add_system(Startup, setup);
+}
+
+fn setup(mut commands: Commands) {
+    commands.spawn((
+        Camera3dBundle::default(), Spectator
+    ));
+}
+```
 
 ## Bevy compatibility
 
