@@ -29,7 +29,7 @@ use bevy_spectator::*;
 fn main() {
     App::new()
         .add_plugins((MinimalPlugins, SpectatorPlugin))
-        .add_system(Startup, setup);
+        .add_systems(Startup, setup);
 }
 
 fn setup(mut commands: Commands) {
