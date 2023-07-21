@@ -1,3 +1,5 @@
+//! A simple scene (based off Bevy's 3d_scene example).
+
 use bevy::prelude::*;
 use bevy_spectator::*;
 
