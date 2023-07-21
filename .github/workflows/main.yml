@@ -5,11 +5,9 @@ on:
       - master
     paths-ignore:
       - ".gitignore"
-      - ".github/dependabot.yml"
   pull_request:
     paths-ignore:
       - ".gitignore"
-      - ".github/dependabot.yml"
 env:
   CARGO_TERM_COLOR: always
 jobs:
@@ -45,7 +43,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Clippy
-        run: cargo clippy --no-deps --tests -- -D warnings
+        run: cargo clippy --no-deps --tests --examples -- -D warnings
 
       - name: Rustdoc
         run: cargo rustdoc -- -D warnings
