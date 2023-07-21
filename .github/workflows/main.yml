@@ -1,0 +1,51 @@
+name: Main
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - ".gitignore"
+      - ".github/dependabot.yml"
+  pull_request:
+    paths-ignore:
+      - ".gitignore"
+      - ".github/dependabot.yml"
+env:
+  CARGO_TERM_COLOR: always
+jobs:
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v3
+
+      - name: Cache crates
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install Taplo
+        run: cargo install taplo-cli
+
+      - name: Format
+        run: |
+          cargo fmt --check
+          taplo fmt --check
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v3
+
+      - name: Instal stable toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache crates
+        uses: Swatinem/rust-cache@v2
+
+      - name: Clippy
+        run: cargo clippy --no-deps --tests -- -D warnings
+
+      - name: Rustdoc
+        run: cargo rustdoc -- -D warnings
