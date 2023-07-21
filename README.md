@@ -1,38 +1,35 @@
-# bevy_spectator
-[![bevy](https://img.shields.io/badge/Bevy-0.10-blue)](https://crates.io/crates/bevy/0.10.0)
-[![Crates.io](https://img.shields.io/crates/v/bevy_spectator)](https://crates.io/crates/bevy_spectator)
-[![Crates.io](https://img.shields.io/crates/d/bevy_spectator)](https://crates.io/crates/bevy_spectator)
-[![docs.rs](https://img.shields.io/docsrs/bevy_spectator)](https://docs.rs/bevy_spectator/)
-[![MIT/Apache 2.0](https://img.shields.io/badge/license-MIT%2FApache-blue.svg)](https://github.com/JonahPlusPlus/bevy_spectator#license)
+# Bevy Spectator
+
+[![crates.io](https://img.shields.io/crates/v/bevy_spectator)](https://crates.io/crates/bevy_spectator)
+[![docs.rs](https://docs.rs/bevy_spectator/badge.svg)](https://docs.rs/bevy_spectator)
 
 A spectator camera plugin for the [Bevy game engine](https://bevyengine.org/).
 
 ## Controls
 
-|Action|Key|
-|-|-|
-|Forward|`W`|
-|Left|`A`|
-|Backward|`S`|
-|Right|`D`|
-|Up|`Space`|
-|Down|`LControl`|
-|Alt. Speed|`LShift`|
-|Release Cursor|`Escape`|
+| Action            | Key           |
+|-------------------|---------------|
+| Forward           | `W`           |
+| Left              | `A`           |
+| Backward          | `S`           |
+| Right             | `D`           |
+| Up                | `Space`       |
+| Down              | `ControlLeft` |
+| Alternative Speed | `ShiftLeft`   |
+| Release Cursor    | `Escape`      |
 
-Movement is constrained to the appropriate axes. (`WASD` to X & Z axes, `Space` & `LShift` to the Y axis)
+Movement is constrained to the appropriate axes. (`WASD` to X & Z axes, `Space` & `ShiftLeft` to the Y axis)
 
-## `basic` Example
-```
+## Basic example
+
+```rust
 use bevy::prelude::*;
 use bevy_spectator::*;
 
 fn main() {
     App::new()
-        .add_plugins(DefaultPlugins)
-        .add_plugin(SpectatorPlugin)
-        .add_startup_system(setup)
-        .run();
+        .add_plugins((MinimalPlugins, SpectatorPlugin))
+        .add_systems(Startup, setup);
 }
 
 fn setup(mut commands: Commands) {
@@ -42,5 +39,9 @@ fn setup(mut commands: Commands) {
 }
 ```
 
-## License
-bevy_spectator is dual-licensed under MIT/Apache-2.0. Feel free to use it under either.
+## Bevy compatibility
+
+| bevy   | bevy_spectator |
+|--------|----------------|
+| 0.11.0 | 0.2            |
+| 0.10.0 | 0.1            |
