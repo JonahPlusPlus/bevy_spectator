@@ -1,6 +1,7 @@
 # Bevy Spectator
 
 [![crates.io](https://img.shields.io/crates/v/bevy_spectator)](https://crates.io/crates/bevy_spectator)
+[![crates.io](https://img.shields.io/crates/d/bevy_spectator)](https://crates.io/crates/bevy_spectator)
 [![docs.rs](https://docs.rs/bevy_spectator/badge.svg)](https://docs.rs/bevy_spectator)
 
 A spectator camera plugin for the [Bevy game engine](https://bevyengine.org/).
