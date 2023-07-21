@@ -22,14 +22,15 @@ Movement is constrained to the appropriate axes. (`WASD` to X & Z axes, `Space` 
 
 ## Basic example
 
-```rust
+```rust,no_run
 use bevy::prelude::*;
 use bevy_spectator::*;
 
 fn main() {
     App::new()
-        .add_plugins((MinimalPlugins, SpectatorPlugin))
-        .add_systems(Startup, setup);
+        .add_plugins((DefaultPlugins, SpectatorPlugin))
+        .add_systems(Startup, setup)
+        .run();
 }
 
 fn setup(mut commands: Commands) {
