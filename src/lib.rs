@@ -92,7 +92,8 @@ fn spectator_update(
             window
         }
         None => {
-            let Some((window, _)) = windows.iter_mut().find(|(_, primary)| primary.is_some()) else {
+            let Some((window, _)) = windows.iter_mut().find(|(_, primary)| primary.is_some())
+            else {
                 panic!("No primary window found!");
             };
 
@@ -121,7 +122,7 @@ fn spectator_update(
         {
             let mouse_delta = {
                 let mut total = Vec2::ZERO;
-                for d in motion.iter() {
+                for d in motion.read() {
                     total += d.delta;
                 }
                 total
