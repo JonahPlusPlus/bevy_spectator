@@ -121,7 +121,7 @@ fn spectator_update(
         {
             let mouse_delta = {
                 let mut total = Vec2::ZERO;
-                for d in motion.iter() {
+                for d in motion.read() {
                     total += d.delta;
                 }
                 total
