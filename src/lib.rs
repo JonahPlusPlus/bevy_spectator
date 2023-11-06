@@ -133,7 +133,7 @@ fn spectator_update(
             let mut dof: Vec3 = camera_transform.rotation.to_euler(EulerRot::YXZ).into();
 
             dof.x += mouse_x;
-            // At 90 degrees, yaw gets misinterpeted as roll. Making 89 the limit fixes that.
+            // At 90 degrees, yaw gets misinterpreted as roll. Making 89 the limit fixes that.
             dof.y = (dof.y + mouse_y).clamp(-89f32.to_radians(), 89f32.to_radians());
             dof.z = 0f32;
 
