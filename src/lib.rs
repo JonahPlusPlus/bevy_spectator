@@ -103,12 +103,14 @@ fn spectator_update(
 
     let mut set_focus = |focused: bool| {
         *focus = focused;
-        let grab_mode = match focused {
-            true => CursorGrabMode::Confined,
-            false => CursorGrabMode::None,
-        };
-        window.cursor.grab_mode = grab_mode;
-        window.cursor.visible = !focused;
+        if !settings.orthographic {
+            let grab_mode = match focused {
+                true => CursorGrabMode::Confined,
+                false => CursorGrabMode::None,
+            };
+            window.cursor.grab_mode = grab_mode;
+            window.cursor.visible = !focused;
+        }
     };
 
     if keys.just_pressed(KeyCode::Escape) {
@@ -117,9 +119,10 @@ fn spectator_update(
         set_focus(true);
     }
 
-    if *focus {
+    // When in orthographic mode, mouse capturing is disabled. Movement should therefore always be enabled.
+    if *focus || settings.orthographic {
         // rotation
-        {
+        if !settings.orthographic {
             let mouse_delta = {
                 let mut total = Vec2::ZERO;
                 for d in motion.read() {
@@ -147,16 +150,18 @@ fn spectator_update(
             let backward = if keys.pressed(KeyCode::S) { 1f32 } else { 0f32 };
             let right = if keys.pressed(KeyCode::D) { 1f32 } else { 0f32 };
             let left = if keys.pressed(KeyCode::A) { 1f32 } else { 0f32 };
-            let up = if keys.pressed(KeyCode::Space) {
-                1f32
+            let up_cond = if !settings.orthographic {
+                keys.pressed(KeyCode::Space)
             } else {
-                0f32
+                keys.pressed(KeyCode::W)
             };
-            let down = if keys.pressed(KeyCode::ControlLeft) {
-                1f32
+            let up = if up_cond { 1f32 } else { 0f32 };
+            let down_cond = if !settings.orthographic {
+                keys.pressed(KeyCode::ControlLeft)
             } else {
-                0f32
+                keys.pressed(KeyCode::S)
             };
+            let down = if down_cond { 1f32 } else { 0f32 };
 
             let speed = if keys.pressed(KeyCode::ShiftLeft) {
                 settings.alt_speed
@@ -164,7 +169,11 @@ fn spectator_update(
                 settings.base_speed
             };
 
-            let delta_axial = (forward - backward) * speed;
+            let delta_axial = if settings.orthographic {
+                0.0
+            } else {
+                (forward - backward) * speed
+            };
             let delta_lateral = (right - left) * speed;
             let delta_vertical = (up - down) * speed;
 
@@ -214,6 +223,10 @@ pub struct SpectatorSettings {
     ///
     /// Use this to control how fast the [`Spectator`] turns when you move the mouse.
     pub sensitivity: f32,
+    /// Use a control scheme more fit for orthographic (2D) rendering
+    ///
+    /// Disables mouse capturing and hiding, prevents moving along z-axis and uses W and S for y-axis movement
+    pub orthographic: bool,
 }
 
 impl Default for SpectatorSettings {
@@ -224,6 +237,7 @@ impl Default for SpectatorSettings {
             base_speed: 10.0,
             alt_speed: 50.0,
             sensitivity: 0.001,
+            orthographic: false,
         }
     }
 }
