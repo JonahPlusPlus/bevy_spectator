@@ -167,7 +167,7 @@ fn spectator_update(
                 settings.base_speed
             };
 
-            let delta_axial = if settings.orthographic { 0f32 } else { (forward - backward) * speed };
+            let delta_axial = if settings.orthographic { 0.0 } else { (forward - backward) * speed };
             let delta_lateral = (right - left) * speed;
             let delta_vertical = (up - down) * speed;
 
