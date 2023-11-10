@@ -21,6 +21,8 @@ A spectator camera plugin for the [Bevy game engine](https://bevyengine.org/).
 
 Movement is constrained to the appropriate axes. (`WASD` to X & Z axes, `Space` & `ShiftLeft` to the Y axis)
 
+When in orthographic mode, only `WASD` is used.
+
 ## Basic example
 
 ```rust,no_run
