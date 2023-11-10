@@ -150,28 +150,18 @@ fn spectator_update(
             let backward = if keys.pressed(KeyCode::S) { 1f32 } else { 0f32 };
             let right = if keys.pressed(KeyCode::D) { 1f32 } else { 0f32 };
             let left = if keys.pressed(KeyCode::A) { 1f32 } else { 0f32 };
-            let up = if {
-                if !settings.orthographic {
-                    keys.pressed(KeyCode::Space)
-                } else {
-                    keys.pressed(KeyCode::W)
-                }
-            } {
-                1f32
+            let up_cond = if !settings.orthographic {
+                keys.pressed(KeyCode::Space)
             } else {
-                0f32
+                keys.pressed(KeyCode::W)
             };
-            let down = if {
-                if !settings.orthographic {
-                    keys.pressed(KeyCode::ControlLeft)
-                } else {
-                    keys.pressed(KeyCode::S)
-                }
-            } {
-                1f32
+            let up = if up_cond { 1f32 } else { 0f32 };
+            let down_cond = if !settings.orthographic {
+                keys.pressed(KeyCode::ControlLeft)
             } else {
-                0f32
+                keys.pressed(KeyCode::S)
             };
+            let down = if down_cond { 1f32 } else { 0f32 };
 
             let speed = if keys.pressed(KeyCode::ShiftLeft) {
                 settings.alt_speed
