@@ -1,3 +1,5 @@
+//! A simple 2D scene using orthographic controls.
+
 use bevy::prelude::*;
 use bevy_spectator::*;
 
@@ -7,9 +9,8 @@ fn main() {
             orthographic: true,
             ..default()
         })
-        .add_plugins(DefaultPlugins)
-        .add_plugin(SpectatorPlugin)
-        .add_startup_system(setup)
+        .add_plugins((DefaultPlugins, SpectatorPlugin))
+        .add_systems(Startup, setup)
         .run();
 }
 
