@@ -6,9 +6,9 @@ use bevy_spectator::*;
 fn main() {
     App::new()
         .insert_resource(SpectatorSettings {
-            base_speed: 5.0,
-            alt_speed: 15.0,
-            sensitivity: 0.0015,
+            base_speed: 0.05,
+            alt_speed: 0.2,
+            sensitivity: 0.05,
             ..default()
         })
         .add_plugins(DefaultPlugins)
