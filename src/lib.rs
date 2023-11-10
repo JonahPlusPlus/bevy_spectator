@@ -92,7 +92,8 @@ fn spectator_update(
             window
         }
         None => {
-            let Some((window, _)) = windows.iter_mut().find(|(_, primary)| primary.is_some()) else {
+            let Some((window, _)) = windows.iter_mut().find(|(_, primary)| primary.is_some())
+            else {
                 panic!("No primary window found!");
             };
 
