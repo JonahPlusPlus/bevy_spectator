@@ -150,12 +150,16 @@ fn spectator_update(
             let backward = if keys.pressed(KeyCode::S) { 1f32 } else { 0f32 };
             let right = if keys.pressed(KeyCode::D) { 1f32 } else { 0f32 };
             let left = if keys.pressed(KeyCode::A) { 1f32 } else { 0f32 };
-            let up = if keys.pressed(KeyCode::Space) || (settings.orthographic && keys.pressed(KeyCode::W)) {
+            let up = if keys.pressed(KeyCode::Space)
+                || (settings.orthographic && keys.pressed(KeyCode::W))
+            {
                 1f32
             } else {
                 0f32
             };
-            let down = if keys.pressed(KeyCode::ControlLeft) || (settings.orthographic && keys.pressed(KeyCode::S)) {
+            let down = if keys.pressed(KeyCode::ControlLeft)
+                || (settings.orthographic && keys.pressed(KeyCode::S))
+            {
                 1f32
             } else {
                 0f32
@@ -167,7 +171,11 @@ fn spectator_update(
                 settings.base_speed
             };
 
-            let delta_axial = if settings.orthographic { 0.0 } else { (forward - backward) * speed };
+            let delta_axial = if settings.orthographic {
+                0.0
+            } else {
+                (forward - backward) * speed
+            };
             let delta_lateral = (right - left) * speed;
             let delta_vertical = (up - down) * speed;
 
@@ -218,7 +226,7 @@ pub struct SpectatorSettings {
     /// Use this to control how fast the [`Spectator`] turns when you move the mouse.
     pub sensitivity: f32,
     /// Use a control scheme more fit for orthographic (2D) rendering
-    /// 
+    ///
     /// Disables mouse capturing and hiding, prevents moving along z-axis and uses W and S for y-axis movement
     pub orthographic: bool,
 }
