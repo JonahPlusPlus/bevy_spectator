@@ -60,8 +60,8 @@ fn spectator_init(
 #[allow(clippy::too_many_arguments)]
 fn spectator_update(
     time: Res<Time>,
-    keys: Res<Input<KeyCode>>,
-    buttons: Res<Input<MouseButton>>,
+    keys: Res<ButtonInput<KeyCode>>,
+    buttons: Res<ButtonInput<MouseButton>>,
     mut motion: EventReader<MouseMotion>,
     mut settings: ResMut<SpectatorSettings>,
     mut windows: Query<(&mut Window, Option<&PrimaryWindow>)>,
@@ -146,20 +146,41 @@ fn spectator_update(
 
         // translation
         {
-            let forward = if keys.pressed(KeyCode::W) { 1f32 } else { 0f32 };
-            let backward = if keys.pressed(KeyCode::S) { 1f32 } else { 0f32 };
-            let right = if keys.pressed(KeyCode::D) { 1f32 } else { 0f32 };
-            let left = if keys.pressed(KeyCode::A) { 1f32 } else { 0f32 };
+            let forward = if keys.pressed(KeyCode::KeyW) {
+                1f32
+            } else {
+                0f32
+            };
+
+            let backward = if keys.pressed(KeyCode::KeyS) {
+                1f32
+            } else {
+                0f32
+            };
+
+            let right = if keys.pressed(KeyCode::KeyD) {
+                1f32
+            } else {
+                0f32
+            };
+
+            let left = if keys.pressed(KeyCode::KeyA) {
+                1f32
+            } else {
+                0f32
+            };
+
             let up_cond = if !settings.orthographic {
                 keys.pressed(KeyCode::Space)
             } else {
-                keys.pressed(KeyCode::W)
+                keys.pressed(KeyCode::KeyW)
             };
             let up = if up_cond { 1f32 } else { 0f32 };
+
             let down_cond = if !settings.orthographic {
                 keys.pressed(KeyCode::ControlLeft)
             } else {
-                keys.pressed(KeyCode::S)
+                keys.pressed(KeyCode::KeyS)
             };
             let down = if down_cond { 1f32 } else { 0f32 };
 
@@ -177,11 +198,11 @@ fn spectator_update(
             let delta_lateral = (right - left) * speed;
             let delta_vertical = (up - down) * speed;
 
-            let mut forward = camera_transform.forward();
+            let mut forward = Vec3::from(camera_transform.forward());
             forward.y = 0f32;
             forward = forward.normalize_or_zero(); // fly fast even when look down/up
 
-            let mut right = camera_transform.right();
+            let mut right = Vec3::from(camera_transform.right());
             right.y = 0f32; // more of a sanity check
             let up = Vec3::Y;
 
