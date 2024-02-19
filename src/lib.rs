@@ -198,11 +198,11 @@ fn spectator_update(
             let delta_lateral = (right - left) * speed;
             let delta_vertical = (up - down) * speed;
 
-            let mut forward = Vec3::from(camera_transform.forward());
+            let mut forward = *camera_transform.forward();
             forward.y = 0f32;
             forward = forward.normalize_or_zero(); // fly fast even when look down/up
 
-            let mut right = Vec3::from(camera_transform.right());
+            let mut right = *camera_transform.right();
             right.y = 0f32; // more of a sanity check
             let up = Vec3::Y;
 
