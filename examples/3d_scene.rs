@@ -23,24 +23,20 @@ fn setup(
 ) {
     // plane
     commands.spawn(PbrBundle {
-        mesh: meshes.add(Mesh::from(shape::Plane {
-            size: 5.0,
-            subdivisions: 0,
-        })),
-        material: materials.add(Color::rgb(0.3, 0.5, 0.3).into()),
+        mesh: meshes.add(Plane3d::new(Vec3::Y).mesh().size(5.0, 5.0)),
+        material: materials.add(Color::rgb(0.3, 0.5, 0.3)),
         ..default()
     });
     // cube
     commands.spawn(PbrBundle {
-        mesh: meshes.add(Mesh::from(shape::Cube { size: 1.0 })),
-        material: materials.add(Color::rgb(0.8, 0.7, 0.6).into()),
+        mesh: meshes.add(Cuboid::default()),
+        material: materials.add(Color::rgb(0.8, 0.7, 0.6)),
         transform: Transform::from_xyz(0.0, 0.5, 0.0),
         ..default()
     });
     // light
     commands.spawn(PointLightBundle {
         point_light: PointLight {
-            intensity: 1500.0,
             shadows_enabled: true,
             ..default()
         },
@@ -50,7 +46,7 @@ fn setup(
     // camera
     commands.spawn((
         Camera3dBundle {
-            transform: Transform::from_xyz(-1.0, 1.5, 1.0).looking_at(Vec3::ZERO, Vec3::Y),
+            transform: Transform::from_xyz(-3.0, 1.5, 3.0).looking_at(Vec3::ZERO, Vec3::Y),
             ..default()
         },
         Spectator,

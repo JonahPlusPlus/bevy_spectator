@@ -6,6 +6,8 @@ use bevy_spectator::*;
 fn main() {
     App::new()
         .insert_resource(SpectatorSettings {
+            base_speed: 100.0,
+            alt_speed: 350.0,
             orthographic: true,
             ..default()
         })
