@@ -23,7 +23,7 @@ fn setup(
 ) {
     // plane
     commands.spawn(PbrBundle {
-        mesh: meshes.add(Rectangle::from_size(Vec2::splat(5.0))),
+        mesh: meshes.add(Plane3d::new(Vec3::Y).mesh().size(5.0, 5.0)),
         material: materials.add(Color::rgb(0.3, 0.5, 0.3)),
         ..default()
     });
