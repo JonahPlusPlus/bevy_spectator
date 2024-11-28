@@ -17,12 +17,15 @@ fn main() {
 }
 
 fn setup(mut commands: Commands) {
-    commands.spawn((Camera2dBundle::default(), Spectator));
-    commands.spawn(SpriteBundle {
-        transform: Transform {
-            scale: Vec3::new(10.0, 10.0, 1.0),
-            ..default()
-        },
-        ..default()
-    });
+    // Sprite
+    commands.spawn((
+        Sprite::default(),
+        Transform::default().with_scale(Vec3::new(10.0, 10.0, 1.0)),
+    ));
+
+    // Camera
+    commands.spawn((
+        Camera2d::default(),
+        Spectator,
+    ));
 }
