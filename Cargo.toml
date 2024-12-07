@@ -32,7 +32,3 @@ bevy = { version = "0.15", default-features = false, features = [
 [features]
 default = ["init"]
 init = []          # Enables automatically choosing a camera
-
-[[example]]
-name = "3d_scene"
-path = "examples/3d_scene.rs"
