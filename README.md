@@ -47,6 +47,7 @@ fn setup(mut commands: Commands) {
 
 | bevy | bevy_spectator |
 |------|----------------|
+| 0.15 | 0.7            |
 | 0.14 | 0.6            |
 | 0.13 | 0.5            |
 | 0.12 | 0.4            |
