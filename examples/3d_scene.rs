@@ -22,13 +22,9 @@ fn setup(
     mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
     commands.spawn((
-        Mesh3d(meshes.add(Plane3d::default().mesh().size(5.0, 5.0))),
-        MeshMaterial3d(materials.add(Color::srgb(0.3, 0.5, 0.3))),
-    ));
-    commands.spawn((
-        Mesh3d(meshes.add(Cuboid::default())),
-        MeshMaterial3d(materials.add(Color::srgb(0.8, 0.7, 0.6))),
-        Transform::from_xyz(0.0, 0.5, 0.0),
+        Camera3d::default(),
+        Transform::from_xyz(-3.0, 1.5, 3.0).looking_at(Vec3::ZERO, Vec3::Y),
+        Spectator,
     ));
     commands.spawn((
         PointLight {
@@ -37,9 +33,14 @@ fn setup(
         },
         Transform::from_xyz(4.0, 8.0, 4.0),
     ));
+
     commands.spawn((
-        Camera3d::default(),
-        Transform::from_xyz(-3.0, 1.5, 3.0).looking_at(Vec3::ZERO, Vec3::Y),
-        Spectator,
+        Mesh3d(meshes.add(Plane3d::default().mesh().size(5.0, 5.0))),
+        MeshMaterial3d(materials.add(Color::srgb(0.3, 0.5, 0.3))),
+    ));
+    commands.spawn((
+        Mesh3d(meshes.add(Cuboid::default())),
+        MeshMaterial3d(materials.add(Color::srgb(0.8, 0.7, 0.6))),
+        Transform::from_xyz(0.0, 0.5, 0.0),
     ));
 }
