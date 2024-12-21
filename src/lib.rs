@@ -6,6 +6,12 @@ use bevy::{
     window::{CursorGrabMode, PrimaryWindow},
 };
 
+#[cfg(feature = "bevy_egui")]
+use crate::egui::{EguiFocusPlugin, EguiFocusState};
+
+#[cfg(feature = "bevy_egui")]
+pub mod egui;
+
 /// A marker `Component` for spectating cameras.
 ///
 /// ## Usage
@@ -32,6 +38,9 @@ impl Plugin for SpectatorPlugin {
         app.add_systems(PostStartup, spectator_init);
 
         app.add_systems(Update, spectator_update);
+
+        #[cfg(feature = "bevy_egui")]
+        app.add_plugins(EguiFocusPlugin);
     }
 }
 
@@ -67,6 +76,7 @@ fn spectator_update(
     mut windows: Query<(&mut Window, Option<&PrimaryWindow>)>,
     mut camera_transforms: Query<&mut Transform, With<Spectator>>,
     mut focus: Local<bool>,
+    #[cfg(feature = "bevy_egui")] egui_focus: Res<EguiFocusState>,
 ) {
     let Some(camera_id) = settings.active_spectator else {
         motion.clear();
@@ -116,6 +126,10 @@ fn spectator_update(
     if keys.just_pressed(KeyCode::Escape) {
         set_focus(false);
     } else if buttons.just_pressed(MouseButton::Left) {
+        #[cfg(feature = "bevy_egui")]
+        set_focus(!egui_focus.wants_focus());
+
+        #[cfg(not(feature = "bevy_egui"))]
         set_focus(true);
     }
 
