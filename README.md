@@ -43,6 +43,18 @@ fn setup(mut commands: Commands) {
 }
 ```
 
+## Features
+
+### `init`
+
+Handles automatically setting `active_spectator` when there is exactly one camera with the `Spectator` component present.
+
+Enabled by default.
+
+### `bevy_egui`
+
+Handles selectively disabling spectator mode entry when [bevy_egui](https://docs.rs/bevy_egui/latest/bevy_egui/) wants focus.
+
 ## Bevy compatibility
 
 | bevy | bevy_spectator |
