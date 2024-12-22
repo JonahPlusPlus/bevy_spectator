@@ -55,8 +55,6 @@ Enabled by default.
 
 Handles selectively disabling spectator mode entry when [bevy_egui](https://docs.rs/bevy_egui/latest/bevy_egui/) wants focus.
 
-See [egui](crate::egui) for details.
-
 ## Bevy compatibility
 
 | bevy | bevy_spectator |

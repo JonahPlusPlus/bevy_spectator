@@ -47,9 +47,7 @@ fn setup(
     ));
 }
 
-fn ui_example(
-    mut contexts: EguiContexts,
-) {
+fn ui_example(mut contexts: EguiContexts) {
     egui::SidePanel::left("left")
         .resizable(false)
         .show(contexts.ctx_mut(), |ui| {
