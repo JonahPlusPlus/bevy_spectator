@@ -2,6 +2,7 @@
 
 use bevy::{
     input::mouse::MouseMotion,
+    log::{error, warn},
     prelude::*,
     window::{CursorGrabMode, PrimaryWindow},
 };
@@ -43,7 +44,7 @@ fn spectator_init(
     use bevy::ecs::query::QuerySingleError;
 
     if settings.active_spectator.is_none() {
-        settings.active_spectator = match cameras.get_single() {
+        settings.active_spectator = match cameras.single() {
             Ok(a) => Some(a),
             Err(QuerySingleError::NoEntities(_)) => {
                 warn!("Failed to find a Spectator; Active camera will remain unset.");
